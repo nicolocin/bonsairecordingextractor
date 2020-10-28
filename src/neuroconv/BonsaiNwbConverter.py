@@ -3,8 +3,8 @@ Functions modified from NWBRecordingExtractor from spikeextractors
 
 Example
 -------
-from BonsaiRecordingExtractor import BonsaiRecordingExtractor
-from BonsaiNwbConverter import *
+from neuroconv.BonsaiRecordingExtractor import BonsaiRecordingExtractor
+from neuroconv.BonsaiNwbConverter import *
 
 bonsai_params = {'bonsai_dir': 'data/',
                 'metadata_file': 'aquisition_oni.bonsai',
@@ -16,7 +16,7 @@ create_nwb(rx, 'bonsai.nwb')
 
 """
 
-from BonsaiRecordingExtractor import BonsaiRecordingExtractor
+from neuroconv.BonsaiRecordingExtractor import BonsaiRecordingExtractor
 from spikeextractors import NwbRecordingExtractor
 from spikeextractors.extractors.nwbextractors import *
 
@@ -27,7 +27,7 @@ from collections import defaultdict, abc
 from pathlib import Path
 import numpy as np
 import dateutil.parser as dp
-import distutils.version
+from packaging.version import Version
 
 try:
     import pynwb
@@ -294,7 +294,7 @@ def create_nwb(recording, save_path):
     assert HAVE_NWB, NwbRecordingExtractor.installation_mesg
 
     assert (
-        distutils.version.LooseVersion(pynwb.__version__) >= "1.3.3"
+        Version(pynwb.__version__) >= Version("1.3.3")
     ), "'write_recording' not supported for version < 1.3.3. Run pip install --upgrade pynwb"
 
     # if os.path.exists(save_path):

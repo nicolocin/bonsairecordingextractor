@@ -1,0 +1,3 @@
+include LICENSE tox.ini versioneer.py
+graft src
+global-exclude *.py[cod]
